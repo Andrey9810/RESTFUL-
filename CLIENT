@@ -1,0 +1,40 @@
+package com.ufidelitas;
+
+/**
+ *
+ * @author admin
+ */
+public class RESTFulClientVoluntarios {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        consulta(1);
+        inserta(1,"Prueba","Apellido","Femenino","prueba@email.com","15/03/2000","18/11/2019");
+        consulta(2);
+        
+        // TODO code application logic here
+    }
+    
+    public static void inserta(int id, String nombre, String apellidos , String genero, String correo, String fecha_nacimiento, String fecha_registro) {
+        String xmlInserta = "<voluntarios>"
+        + "<id>"+id+"</id>"
+        + "<nombre>"+nombre+"</nombre>"
+        + "<apellidos>"+apellidos+"</apellidos>"
+        + "<genero>"+genero+"</genero>"
+        + "<correo>"+correo+"</correo>"
+        + "<fecha_nacimiento>"+fecha_nacimiento+"</fecha_nacimiento>"
+        + "<fecha_registro>"+fecha_registro+"</fecha_registro>";
+        Client client = new Client();
+        client.create_XML(xmlInserta);
+        client.close();
+    }
+    public static void consulta(int id) {
+        Client client = new Client();
+        String xmlConsulta = client.find_XML(String.class, "" + id);
+        javax.swing.JOptionPane.showMessageDialog(null, "La información es:\n" + xmlConsulta);
+        client.close();
+}
+    
+}
